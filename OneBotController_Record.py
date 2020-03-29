@@ -43,9 +43,10 @@ def controller_thread():
         sleep(0.3)
         
         # Read Arduino Reply
-        print("Ard:", ser.read(ser.inWaiting())) # Read the newest output from the Arduino
-
-    ser.close()
+        try:
+            print("Ard:", ser.read(ser.inWaiting())) # Read the newest output from the Arduino
+        except Exception:
+            pass
 
 # KeyBoard Record Function
 def keyboard_thread():
@@ -102,6 +103,6 @@ pickle.dump({"keyboard":kb_recorded,"mouse":m_recorded}, open(inst_name + "_data
 test = pickle.load(open(inst_name + "_data.p", "rb" ))
 print(test)
 
-c_thread.join()
+ser.close()
 
 # Turn this into a pip library

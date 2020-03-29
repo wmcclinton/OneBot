@@ -7,6 +7,8 @@ ser = serial.Serial('COM15', 115200) # Establish the connection on a specific po
 sleep(2)
 bot = Agent()
 
+ard_reply = ""
+
 while True:
     a, x, y = bot.random_action()
     print(str(a) + chr(x + 32) + chr(y + 32))
@@ -18,4 +20,5 @@ while True:
     sleep(0.3)
     
     # Read Arduino Reply
-    print("Ard:", ser.read(ser.inWaiting())) # Read the newest output from the Arduino
+    ard_reply = ser.read(ser.inWaiting())
+    print("Ard:", ard_reply) # Read the newest output from the Arduino
